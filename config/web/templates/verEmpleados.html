@@ -23,7 +23,7 @@
     </header>
     <main>
         <div class="banner">
-            <img src="../static/img/logoEmpleados.png" class="center" style="margin-left: 35%; margin-right: 35%;">
+            <img src="../static/img/logoEmpleados.png" class="center" style="display: block; margin-left: auto; margin-right: auto;">
         </div>
         <section>
             <div class="container-fluid g-0" style="background-color: white; margin-left: auto; margin-right: auto;">
@@ -47,6 +47,14 @@
                                             <p>Administrador</p>
                                         {%endif%}
                                     </h5>
+                                    <button class="" type="button" data-bs-toggle="collapse" data-bs-target="#holi{{empleado.id}}" style="width: 50px; height: 30px;"><i class="bi bi-pencil-square w-100"></i>
+                                    </button>
+                                    <div class="collapse" id="holi{{empleado.id}}">
+                                      <div class="card card-body">
+                                        {{formulario}}
+                                        {%  %}
+                                      </div>
+                                    </div>
                                 </p>
                             </div>
                             </div>

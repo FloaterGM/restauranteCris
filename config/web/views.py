@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from web.formularios.formularioPlatos import FormularioPlatos
 from web.formularios.formularioEmpleados import FormularioEmpleados
+from web.formularios.formularioEditPlatos import formularioEditPlatos
 from web.models import Platos, Empleado
 
 def Home(request):
@@ -16,13 +17,31 @@ def vistaEmployees(request):
 
     return render(request, 'verEmpleados.html', dataEmployees)
 
+def editarPlatos(request, id):
+    if request.method == 'POST':
+        datosPlatos = formularioEditPlatos(request.POST)
+        if datosPlatos.is_valid():
+            datosPlates = datosPlatos.cleaned_data
+
+            try:
+                Platos.objects.filter(pk=id).update(precio=datosPlates["precioPlato"])
+            
+            except Exception as error:
+                print("error", error)
+                
+
+    return redirect('menu')
+    
+
 def vistaMenu(request):
 
     verPlatos = Platos.objects.all()
-    print(verPlatos)
+    
+    formularioEditar = formularioEditPlatos()
 
     dataMenu = {
-        'platos': verPlatos
+        'platos': verPlatos,
+        'formulario': formularioEditar
     }
 
     return render(request, 'verMenu.html', dataMenu)
@@ -30,6 +49,8 @@ def vistaMenu(request):
 def vistaPlatos(request):
 
     formulario = FormularioPlatos()
+
+    formularioEditar = formularioEditPlatos()
 
     dataPlatos = {
         'formulario' : formulario,
