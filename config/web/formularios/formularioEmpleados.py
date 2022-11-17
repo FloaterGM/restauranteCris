@@ -13,10 +13,10 @@ class FormularioEmpleados(forms.Form):
 
     #DENTRO DE LA CLASE CADA ATRIBUTO SERÁ UN INPUT
 
-    identificacionEmpleado=forms.CharField(
+    fotoEmpleado=forms.CharField(
         widget=forms.TextInput(attrs={'class':'form-control mb-3'}),
         required=True,
-        max_length=16
+        max_length=200
     )
 
     nombreEmpleado=forms.CharField(

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/img/logo.png">
     <title>
         Registro de empleados
     </title>
@@ -23,10 +24,10 @@
         {% if banderaEmpleados %}
             <script>
                 Swal.fire(
-                    'Good job!',
-                    'You clicked the button!',
-                    'success'
-                )
+                'Envio exitoso!',
+                'Empleado agregado con exito!',
+                'success'
+            )
             </script>
         {% endif %}
        
@@ -65,7 +66,7 @@
                         <h1 classs="fw-bold my-3 animate__animated animate__fadeInDown">REGISTRO DE PLATOS</h1>
                         {{formularioEmpleados}}
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-success">Registrar</button>
+                        <button type="submit" class="btn btn-dark w-100">Registrar empleado</button>
                     </form>
                 </div>
                 

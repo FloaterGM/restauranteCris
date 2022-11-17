@@ -1,12 +1,33 @@
 from django.shortcuts import render
 from web.formularios.formularioPlatos import FormularioPlatos
 from web.formularios.formularioEmpleados import FormularioEmpleados
-from web.models import Platos, Empleados
+from web.models import Platos, Empleado
 
 def Home(request):
     return render(request, 'index.html')
+
+def vistaEmployees(request):
+
+    verEmpleados = Empleado.objects.all()
+
+    dataEmployees = {
+        'empleados': verEmpleados
+    }
+
+    return render(request, 'verEmpleados.html', dataEmployees)
+
+def vistaMenu(request):
+
+    verPlatos = Platos.objects.all()
+    print(verPlatos)
+
+    dataMenu = {
+        'platos': verPlatos
+    }
+
+    return render(request, 'verMenu.html', dataMenu)
     
-def Platos(request):
+def vistaPlatos(request):
 
     formulario = FormularioPlatos()
 
@@ -19,49 +40,51 @@ def Platos(request):
         datosPlatos = FormularioPlatos(request.POST)
         if datosPlatos.is_valid():
             datosPlates = datosPlatos.cleaned_data
-            nuevoPlato = Platos(
-                nombreplato = datosPlates['nombrePlato'],
-                descripcionplato = datosPlates['descripcionPlato'],
-                fotoplato = datosPlates['fotoPlato'],
-                precioplato = datosPlates['precioPlato'],
-                tipoplato = datosPlates['tipoPlato']
+            newPlato = Platos(
+                nombre=datosPlates["nombrePlato"],
+                descripcion=datosPlates["descripcionPlato"],
+                foto=datosPlates["fotoPlato"],
+                precio=datosPlates["precioPlato"],
+                tipo=datosPlates["tipoPlato"]
             )
 
-            
             try:
-                nuevoPlato.save()
+                newPlato.save()
                 dataPlatos["banderaPlatos"]=True
                 print("EXITO GUARDANDO LOS DATOS")
             
             except Exception as error:
                 dataPlatos["banderaPlatos"]=False
                 print("error",error)
+            
+
+        
 
     return render(request, 'platos.html', dataPlatos)
 
-def Empleados(request):
+def vistaEmpleados(request):
 
     formulario = FormularioEmpleados
 
     dataEmpleados = {
         'formularioEmpleados' : formulario,
-        'banderaEmpleados' : False
+        'banderaEmpleados' : False,
     }
 
     if request.method == 'POST':
         datosEmpleados = FormularioEmpleados(request.POST)
         if datosEmpleados.is_valid():
             datosEmployees = datosEmpleados.cleaned_data
-            nuevoEmpleado = Empleados(
-                identificacionempleado = datosEmployees["identificacionEmpleado"],
-                nombreempleado = datosEmployees["nombreEmpleado"],
-                numerocontacto = datosEmployees["numeroContacto"],
+            newEmpleado = Empleado(
+                foto = datosEmployees["fotoEmpleado"],
+                nombre = datosEmployees["nombreEmpleado"],
+                numero = datosEmployees["numeroContacto"],
                 salario = datosEmployees["salario"],
-                cargoempleado = datosEmployees["cargoEmpleado"]
+                cargo = datosEmployees["cargoEmpleado"]
             )
 
             try:
-                nuevoEmpleado.save()
+                newEmpleado.save()
                 dataEmpleados["banderaEmpleados"]=True
                 print("EXITO GUARDANDO LOS DATOS")
             
@@ -69,7 +92,7 @@ def Empleados(request):
                 dataEmpleados["banderaEmpleados"]=False
                 print("error",error)
 
-         
+           
  
 
     return render(request, 'empleados.html', dataEmpleados)

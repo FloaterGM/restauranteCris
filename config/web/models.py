@@ -122,12 +122,12 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Empleados(models.Model):
-    identificacionempleado = models.CharField(db_column='identificacionEmpleado', primary_key=True, max_length=16)  # Field name made lowercase.
-    nombreempleado = models.CharField(db_column='nombreEmpleado', max_length=50)  # Field name made lowercase.
-    numeroContacto = models.CharField(db_column='numeroContacto', max_length=10)  # Field name made lowercase.
-    salario = models.CharField(db_column='salario', max_length=8)  # Field name made lowercase.
-    cargoempleado = models.IntegerField(db_column='cargoEmpleado')  # Field name made lowercase.
+class Empleado(models.Model):
+    foto = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=50)
+    numero = models.CharField(max_length=10)
+    salario = models.CharField(max_length=8)
+    cargo = models.IntegerField()
 
     class Meta:
         managed = False
@@ -135,11 +135,11 @@ class Empleados(models.Model):
 
 
 class Platos(models.Model):
-    nombreplato = models.CharField(db_column='nombrePlato', max_length=50)  # Field name made lowercase.
-    descripcionplato = models.CharField(db_column='descripcionPlato', max_length=200)  # Field name made lowercase.
-    fotoplato = models.CharField(db_column='fotoPlato', max_length=200)  # Field name made lowercase.
-    precioplato = models.IntegerField(db_column='precioPlato')  # Field name made lowercase.
-    tipoplato = models.IntegerField(db_column='tipoPlato')  # Field name made lowercase.
+    nombre = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=200)
+    foto = models.CharField(max_length=200)
+    precio = models.IntegerField()
+    tipo = models.IntegerField()
 
     class Meta:
         managed = False
